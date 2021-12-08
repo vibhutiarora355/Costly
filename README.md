@@ -1,6 +1,6 @@
-## Lesson-2
+## Lesson-8
 
-Creating our first component, homepage and adding scss to help us with writing our styles
+Starting our sign in section by creating a new sign in and sign up page, as well as start creating sign in component.
 
 # How to fork and clone
 
