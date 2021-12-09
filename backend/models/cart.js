@@ -1,16 +1,15 @@
-
 var mongoose = require('mongoose');
 const productSchema = require('./product.js');
 var Schema = mongoose.Schema;
-var cart = new Schema(
-{
+var cart = new Schema({
     user: String,
     items: [{
         productID: String,
         price: Number,
-        name: String
+        name: String,
+        imageURL: String,
+        quantity: Number
     }],
-    quantity: Number
 });
 //Export model
 module.exports = mongoose.model('cart', cart);
