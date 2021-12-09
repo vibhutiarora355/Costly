@@ -128,6 +128,7 @@ function addToCart(prodId) {
 		let currentUserCartKey = 'cart_' + currUserId;
 		CART = JSON.parse(localStorage.getItem(currentUserCartKey || "[]"));
 		let isAlreadyInCart = CART.some(item => item.id === prodId);
+
 		if(isAlreadyInCart) {
 			CART.forEach(item => {
 				if(item.id === prodId) {
