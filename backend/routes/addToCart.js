@@ -20,7 +20,7 @@ connectToDB();
 const router = express.Router()
 
 router.get("/getCart", (req,res) => {
-    var user = req.user;
+    var user = req.query.user;
     CartsModel
   .find({
     user: user
@@ -30,7 +30,8 @@ router.get("/getCart", (req,res) => {
       console.log(err);
       return res.status(500).send(err)
     }
-    return res.status(200).send(entry);
+    console.log(entry)
+    return res.status(200).send(entry[0]);
   }); 
 })
 
@@ -52,10 +53,10 @@ router.get("/addToCart", async (req,res) => {
             {
                 productID:ID,
                 price:price,
-                name:name
+                name:name,
+                quantity: 1
             }
         ],
-        quantity:1
     });
     console.log(currentCart);
     // await CartsModel

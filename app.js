@@ -134,7 +134,7 @@ function addToCart(prodId, prodName, prodPrice) {
         Http.open("GET", url);
         Http.send();
         Http.onreadystatechange = (e) => {
-            console.log(Http.responseText)
+            console.log(Http.response)
         }
         CART = JSON.parse(localStorage.getItem(currentUserCartKey || "[]"));
         let isAlreadyInCart = CART.some(item => item.id === prodId);

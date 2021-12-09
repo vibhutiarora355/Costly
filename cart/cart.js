@@ -1,4 +1,4 @@
-function renderCart() {
+async function renderCart() {
     console.log("cart-called");
     let cartContainer = document.getElementById('cart-container');
     cartContainer.innerHTML = "";
@@ -6,24 +6,29 @@ function renderCart() {
     if (sessionStorage.getItem('isAuthenticated')) {
         let currUserId = sessionStorage.getItem('currUserId');
         let currentUserCartKey = 'cart_' + currUserId;
-        const Http = new XMLHttpRequest();
-        const url = `http://localhost:4000/api/getCart?user=${currUserId}`;
-        console.log(url);
-        Http.open("GET", url);
-        Http.send();
-        var cart = []
-        Http.onreadystatechange = (e) => {
-                cart = response[0].items
-            }
-            // let cart = JSON.parse(localStorage.getItem(currentUserCartKey || "[]"));
-        let cartArr = cart.map(item => {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].id === item.productID) {
-                    return {...data[i], quantity: item.quantity }
-                }
-            }
-        });
-        cartArr.forEach((item, index) => {
+        let cart = [];
+        await fetch(`http://localhost:4000/api/getCart?user=${currUserId}`, {
+            method: "GET",
+          }).then((response) => response.json())
+          .then((response) => {
+            cart = response.items;
+            console.log(cart);
+        })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log(cart);
+        // console.log(cartArr);
+        // // console.log(`Cart: ${cart}`);
+        // // let cart = JSON.parse(localStorage.getItem(currentUserCartKey || "[]"));
+        // let cartArr = cart.map(item => {
+        //     if (data[i].id === item.productID) {
+        //         return {...data[i], quantity: item.quantity}
+        //     }
+        // });
+        // console.log(cartArr);
+        cart.forEach((item, index) => {
+            console.log(item);
             cartContainer.innerHTML += `
 			<div class="cart-product-item">
 			<div class="cart-prod-image">
