@@ -9,9 +9,11 @@ async function renderCart() {
         let cart = [];
         await fetch(`http://localhost:4000/api/getCart?user=${currUserId}`, {
             method: "GET",
-          }).then((response) => response.json())
-          .then((response) => {
-            cart = response.items;
+          }).then(response => response.text())
+          .then(response => {
+            console.log(currUserId);
+            let responseParsed = JSON.parse(response);
+            cart = responseParsed.items;
             console.log(cart);
         })
       .catch((error) => {

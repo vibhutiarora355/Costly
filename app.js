@@ -109,7 +109,7 @@ function renderProducts(cat) {
 							<span id="prod-title">${item.name}</span>
 							<span id="prod-price">₹ ${item.price}</span>
 							<p id="prod-description">${item.description}</p>
-							<form action="javascript:addToCart('${item.id}','${item.name}',${item.price})" class="cart-btn">
+							<form action="javascript:addToCart('${item.id}','${item.name}',${item.price},'${item.imageURL}')" class="cart-btn">
 								<button class="btn" id="add-to-cart" type="submit">Add to cart</button>
 							</form>
 						</div>
@@ -122,14 +122,14 @@ function renderProducts(cat) {
 }
 
 // Add the item with the product id to the current user's cart
-function addToCart(prodId, prodName, prodPrice) {
+function addToCart(prodId, prodName, prodPrice,imageURL) {
     if (sessionStorage.getItem('isAuthenticated')) {
         let currUserId = sessionStorage.getItem('currUserId');
         let currentUserCartKey = 'cart_' + currUserId;
         // /addToCart GET request
         // user, productID, price, name
         const Http = new XMLHttpRequest();
-        const url = `http://localhost:4000/api/addToCart?user=${currUserId}&productID=${prodId}&price=${prodPrice}&name=${prodName}`;
+        const url = `http://localhost:4000/api/addToCart?user=${currUserId}&productID=${prodId}&price=${prodPrice}&name=${prodName}&imageURL=imageURL`;
         console.log(url);
         Http.open("GET", url);
         Http.send();
