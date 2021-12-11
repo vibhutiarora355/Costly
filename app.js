@@ -129,7 +129,7 @@ function addToCart(prodId, prodName, prodPrice,imageURL) {
         // /addToCart GET request
         // user, productID, price, name
         const Http = new XMLHttpRequest();
-        const url = `http://localhost:4000/api/addToCart?user=${currUserId}&productID=${prodId}&price=${prodPrice}&name=${prodName}&imageURL=imageURL`;
+        const url = `http://localhost:4000/api/addToCart?user=${currUserId}&productID=${prodId}&price=${prodPrice}&name=${prodName}&imageURL=${imageURL}`;
         console.log(url);
         Http.open("GET", url);
         Http.send();

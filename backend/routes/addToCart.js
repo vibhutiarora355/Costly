@@ -50,6 +50,7 @@ async function cartAdd(itemToAdd,user, res) {
 			console.log(`${itemToAdd.productID} ${item.productID}`)
 			if (itemToAdd.productID === item.productID) {
 				itemFound = true;
+				item.price = itemToAdd.price;
 				item.quantity += 1;
 			}
 		});
@@ -80,8 +81,8 @@ async function cartAdd(itemToAdd,user, res) {
 
 router.get("/secureAddToCart", async (req, res) => {
 	let user = req.query.user;
-	let ID = req.query.productID;
-	let product = await ProductsModel.findOne({ id: ID })
+	let ID = req.query.productID;//gets the ID from the frontend
+	let product = await ProductsModel.findOne({ id: ID })//fetches the price from the DATABASE
 	if(product != null) {
 		let itemToAdd = {
 			productID: ID,
@@ -100,7 +101,7 @@ router.get("/addToCart", async (req, res) => {
 	let user = req.query.user;
 	let itemToAdd = {
 		productID: req.query.productID,
-		price: req.query.price,
+		price: req.query.price,//fetches the price from the FRONTEND
 		name: req.query.name,
 		quantity: 1,
 		imageURL: req.query.imageURL
